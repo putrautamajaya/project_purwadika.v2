@@ -1,0 +1,25 @@
+.logoSize {
+    height: 100px;
+    width: 100px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.logoArea {
+    text-align: right;
+    padding: 0px;
+}
+
+.backGroundSilver {
+    background-color: silver;
+}
+.backGroundSilver:hover {
+    background-color: white;
+}
+
+.backGroundLightGray {
+    background-color: lightgrey;
+}
+.backGroundLightGray:hover {
+    background-color: white;
+}
