@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './component/header';
 import CarouselProject from './component/carousel';
+import NewArrival from './component/newArrival';
 
 class App extends Component {
   render() {
@@ -10,6 +11,8 @@ class App extends Component {
         <Header />
 
         <CarouselProject/>
+        
+        <NewArrival/>
         
       </div>
     );

@@ -1,0 +1,10 @@
+.line {
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+}
+
+.imgSize {
+    width: 300px;
+    height: 300px;
+}

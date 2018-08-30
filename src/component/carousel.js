@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import { Carousel } from 'react-bootstrap';
-import image1 from '../support/images/imgCarousel1.jpg';
-import image2 from '../support/images/imgCarousel2.jpg';
-import image3 from '../support/images/imgCarousel3.jpg';
 import '../support/logo.css';
 
 class carouselProject extends Component {
@@ -15,26 +12,27 @@ class carouselProject extends Component {
         
 
         <div className="row">
-
+            {/* logo-logo di samping carousel */}
             <div className="col-sm-2 logoArea">
-            <div className="backGroundLightGray">
-                <img className="logoSize"  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvmXckW_q6TYlumVI2J2ujuXRfWtqzlFv0Lzw8UhBoDY8CtcxXeg"/>
-            </div>
-            <div className="backGroundSilver">
-            <img className="logoSize" src="https://img.grouponcdn.com/coupons/gMH7PGJwA4KdS3teZNvpXD/nike-highres-500x500"/>
-            </div>
-            <div className="backGroundLightGray">
-            <img className="logoSize" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgyBP4L_asgymmJGaDSUgviHwDr-2cS8Q5xdJSu6V6h9TA4ErAtA"/>
-            </div>
+                <div className="backGroundLightGray">
+                    <img className="logoSize"  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvmXckW_q6TYlumVI2J2ujuXRfWtqzlFv0Lzw8UhBoDY8CtcxXeg"/>
+                </div>
 
-            <div className="backGroundSilver">
-            <img className="logoSize" src="https://botw-pd.s3.amazonaws.com/styles/logo-thumbnail/s3/102010/new_balance.gif?itok=0Y_RkIur"/>
-            </div>
+                <div className="backGroundSilver">
+                    <img className="logoSize" src="https://img.grouponcdn.com/coupons/gMH7PGJwA4KdS3teZNvpXD/nike-highres-500x500"/>
+                </div>
 
-            <div className="backGroundLightGray">
-            <img className="logoSize" src="http://multimedia.lynden.wednet.edu/logos/reebok_logo.gif"/>
-            </div>
-        
+                <div className="backGroundLightGray">
+                    <img className="logoSize" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgyBP4L_asgymmJGaDSUgviHwDr-2cS8Q5xdJSu6V6h9TA4ErAtA"/>
+                </div>
+
+                <div className="backGroundSilver">
+                    <img className="logoSize" src="https://botw-pd.s3.amazonaws.com/styles/logo-thumbnail/s3/102010/new_balance.gif?itok=0Y_RkIur"/>
+                </div>
+
+                <div className="backGroundLightGray">
+                    <img className="logoSize" src="http://multimedia.lynden.wednet.edu/logos/reebok_logo.gif"/>
+                </div>
             </div>
             
             
