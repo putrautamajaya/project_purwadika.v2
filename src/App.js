@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import Header from './component/header';
-import CarouselProject from './component/carousel';
-import NewArrival from './component/newArrival';
+import { Route } from 'react-router-dom';
+
 import LoginPage from './component/loginPage';
+import HomePage from './component/homePage'; 
+
+
 
 
 class App extends Component {
@@ -10,13 +13,13 @@ class App extends Component {
     return (
       <div className="App">
 
-        <Header />
+        <Header />     
 
-        {/* <CarouselProject/>
-        
-        <NewArrival/> */}
-
-        <LoginPage/>
+        <div>
+          <Route exact path="/" component={ HomePage }/>
+          <Route path="/loginPage" component={ LoginPage }/>
+          {/* <Route path="/movielist" component={ MovieList }/> */}
+        </div>
         
       </div>
     );

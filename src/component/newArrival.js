@@ -21,13 +21,13 @@ class newArrival extends Component {
     renderNewArrival = () => {
         return this.state.newArrivalData.map( (arrivalData) => 
 
-        <div className="col-sm-3 ">
-            <div class="card" style={{width: "18rem"}}>
+        <div className="col-sm-3">
+            <div class="card marginBottomZero" style={{width: "350px"}}>
                 <img class="card-img-top imgSize" src={arrivalData.url}/>
                 <div class="card-body">
-                    <h5 class="card-title">{arrivalData.name}</h5>
-                    <p class="card-text">Price: {arrivalData.price}</p>
-                    <p class="card-text">brand: {arrivalData.brand}</p>
+                    <h5 class="card-title"><b>{arrivalData.name}</b></h5>
+                    <p class="card-text"><b>Price:</b> {arrivalData.price}</p>
+                    <p class="card-text"><b>brand:</b> {arrivalData.brand}</p>
                     <a href="#" class="btn btn-primary">Add to Cart</a>
                 </div>
             </div>
@@ -41,8 +41,8 @@ class newArrival extends Component {
             <div className="container-fluid">
 
                 <h1>New Arrival</h1>
-                <hr className="line" />
-
+                <hr className="line hrMarginBottom" />
+                
                 <div className="row">
                     {this.renderNewArrival()}
                 </div>

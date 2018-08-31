@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem, FormGroup, FormControl, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 class header extends Component {
 
@@ -8,7 +9,7 @@ class header extends Component {
             <Navbar fixedTop={true} inverse collapseOnSelect>
                 <Navbar.Header>
                     <Navbar.Brand>
-                    <a href="#brand">ShoesMarket</a>
+                        <Link to="/">ShoesMarket</Link>
                     </Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>
@@ -46,7 +47,7 @@ class header extends Component {
                             
                             <p class="btn btn-warning ">
                                 <span class="glyphicon glyphicon-search"></span> Search 
-                            </p>
+                            </p>{' '}
 
                             <p class="btn btn-info ">
                                 <span class="glyphicon glyphicon-shopping-cart"></span> Cart 
@@ -57,7 +58,7 @@ class header extends Component {
 
                     <Nav pullRight>
                         <NavItem eventKey={1} href="#">
-                            Login
+                            <Link to="/loginPage">Login</Link>
                         </NavItem>
 
                         <NavItem eventKey={2} href="#">
