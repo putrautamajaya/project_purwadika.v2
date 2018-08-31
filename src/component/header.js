@@ -47,6 +47,10 @@ class header extends Component {
                             <p class="btn btn-warning ">
                                 <span class="glyphicon glyphicon-search"></span> Search 
                             </p>
+
+                            <p class="btn btn-info ">
+                                <span class="glyphicon glyphicon-shopping-cart"></span> Cart 
+                            </p>
                             
                         </Navbar.Form>
                     </Nav>

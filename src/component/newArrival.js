@@ -1,48 +1,54 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import '../support/newArrival.css';
+import { API_URL_1 } from '../support/API_url';
 
 class newArrival extends Component {
-    newArrival = () => {
-        return (
-            <div className="container-fluid">
-                <h1>New Arrival</h1>
-                <hr className="line" />
+    state = { newArrivalData: []}
 
-                <div className="row">
+    getNewArrivalData = () => {
+        axios.get( API_URL_1 + "/newArrival" )
+        .then( newArrData => {
+            console.log(newArrData);
+            this.setState({ newArrivalData: newArrData.data });
+        });
+    }
 
-                    <div className="col-sm-3 ">
-                        <div class="card" style={{width: "18rem"}}>
-                            <img class="card-img-top imgSize" src="https://www.adidas.com.au/dis/dw/image/v2/aagl_prd/on/demandware.static/-/Sites-adidas-products/default/dw295ffd1e/zoom/CQ2405_01_standard.jpg" alt="Card image cap"/>
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Add to Cart</a>
-                            </div>
-                        </div>
-                    </div>
+    componentWillMount() {
+        this.getNewArrivalData();
+    }
 
-                    <div className="col-sm-3 ">
-                        <p>hola</p>
-                    </div>
-                    <div className="col-sm-3 ">
-                        <p>hola</p>
-                    </div>
-                    <div className="col-sm-3 ">
-                        <p>hola</p>
-                    </div>
+    renderNewArrival = () => {
+        return this.state.newArrivalData.map( (arrivalData) => 
 
+        <div className="col-sm-3 ">
+            <div class="card" style={{width: "18rem"}}>
+                <img class="card-img-top imgSize" src={arrivalData.url}/>
+                <div class="card-body">
+                    <h5 class="card-title">{arrivalData.name}</h5>
+                    <p class="card-text">Price: {arrivalData.price}</p>
+                    <p class="card-text">brand: {arrivalData.brand}</p>
+                    <a href="#" class="btn btn-primary">Add to Cart</a>
                 </div>
-
-                    
-                
-                
             </div>
+        </div>
+
         );
     }
 
     render() {
         return (
-            this.newArrival()
+            <div className="container-fluid">
+
+                <h1>New Arrival</h1>
+                <hr className="line" />
+
+                <div className="row">
+                    {this.renderNewArrival()}
+                </div>
+
+            </div>
+            
         );
     }
 }
