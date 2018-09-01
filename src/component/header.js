@@ -46,22 +46,28 @@ class header extends Component {
                                 <MenuItem eventKey={1.1}>Basket Ball</MenuItem>
                                 <MenuItem eventKey={1.2}>Futsal</MenuItem>
                                 <MenuItem eventKey={1.3}>Running</MenuItem>
-                                <MenuItem eventKey={1.4}>Tennis</MenuItem>
-                                <MenuItem eventKey={1.5}>Soccer</MenuItem>
-                                <MenuItem eventKey={1.6}>Sneaker</MenuItem>
-                                <MenuItem eventKey={1.7}>Training</MenuItem>
+                                <MenuItem eventKey={1.4}>Soccer</MenuItem>
+                                <MenuItem eventKey={1.5}>Sneaker</MenuItem>
                                 <MenuItem divider />
                             </NavDropdown>
     
                             <NavDropdown eventKey={2} title="Brand" id="basic-nav-dropdown">
                                 <MenuItem divider />
-                                <MenuItem eventKey={2.1}>Addidas</MenuItem>
-                                <MenuItem eventKey={2.2}>Nike</MenuItem>
-                                <MenuItem eventKey={2.3}>Puma</MenuItem>
-                                <MenuItem eventKey={2.4}>Reebok</MenuItem>
-                                <MenuItem eventKey={2.5}>Jordan</MenuItem>
-                                <MenuItem eventKey={2.6}>Under Armor</MenuItem>
-                                <MenuItem eventKey={2.7}>New Balance</MenuItem>
+                                <MenuItem eventKey={2.1}>
+                                    <Link to="/adidas">Adidas</Link>
+                                </MenuItem>
+                                <MenuItem eventKey={2.2}>
+                                    <Link to="/nike">Nike</Link>
+                                </MenuItem>
+                                <MenuItem eventKey={2.3}>
+                                    <Link to="/reebok">Reebok</Link>
+                                </MenuItem>
+                                <MenuItem eventKey={2.4}>
+                                    <Link to="/underarmor">Under Armor</Link>
+                                </MenuItem>
+                                <MenuItem eventKey={2.5}>
+                                    <Link to="/newbalance">New Balance</Link>
+                                </MenuItem>
                                 <MenuItem divider />
                             </NavDropdown>
     
@@ -113,22 +119,28 @@ class header extends Component {
                                 <MenuItem eventKey={1.1}>Basket Ball</MenuItem>
                                 <MenuItem eventKey={1.2}>Futsal</MenuItem>
                                 <MenuItem eventKey={1.3}>Running</MenuItem>
-                                <MenuItem eventKey={1.4}>Tennis</MenuItem>
-                                <MenuItem eventKey={1.5}>Soccer</MenuItem>
-                                <MenuItem eventKey={1.6}>Sneaker</MenuItem>
-                                <MenuItem eventKey={1.7}>Training</MenuItem>
+                                <MenuItem eventKey={1.4}>Soccer</MenuItem>
+                                <MenuItem eventKey={1.5}>Sneaker</MenuItem>
                                 <MenuItem divider />
                             </NavDropdown>
     
                             <NavDropdown eventKey={2} title="Brand" id="basic-nav-dropdown">
                                 <MenuItem divider />
-                                <MenuItem eventKey={2.1}>Addidas</MenuItem>
-                                <MenuItem eventKey={2.2}>Nike</MenuItem>
-                                <MenuItem eventKey={2.3}>Puma</MenuItem>
-                                <MenuItem eventKey={2.4}>Reebok</MenuItem>
-                                <MenuItem eventKey={2.5}>Jordan</MenuItem>
-                                <MenuItem eventKey={2.6}>Under Armor</MenuItem>
-                                <MenuItem eventKey={2.7}>New Balance</MenuItem>
+                                <MenuItem eventKey={2.1}>
+                                    <Link to="/adidas">Adidas</Link>
+                                </MenuItem>
+                                <MenuItem eventKey={2.2}>
+                                    <Link to="/nike">Nike</Link>
+                                </MenuItem>
+                                <MenuItem eventKey={2.3}>
+                                    <Link to="/reebok">Reebok</Link>
+                                </MenuItem>
+                                <MenuItem eventKey={2.4}>
+                                    <Link to="/underarmor">Under Armor</Link>
+                                </MenuItem>
+                                <MenuItem eventKey={2.5}>
+                                    <Link to="/newbalance">New Balance</Link>
+                                </MenuItem>
                                 <MenuItem divider />
                             </NavDropdown>
     

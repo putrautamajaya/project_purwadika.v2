@@ -37,6 +37,7 @@ class newArrival extends Component {
     }
 
     render() {
+        console.log(this.state.newArrivalData)
         return (
             <div className="container-fluid">
 
