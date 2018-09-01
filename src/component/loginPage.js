@@ -1,43 +1,52 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { onLogin } from '../actionCreator';
+import { Redirect } from 'react-router-dom';
 import '../support/loginPage.css';
 
 class loginPage extends Component {
+
+    onLoginClick = () => {
+        let email = this.refs.inputEmail.value;
+        let password = this.refs.inputPassword.value;
+
+        this.props.onLogin({email,password});
+    }
+
     render() {
         console.log(this.props.userLogin);
-        return (
-            <div class="container">
-                <br/>
-                <br/>
-                <br/>
-                <div class="card card-container" style={{textAlign: "center"}}>
-                        {/* <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" /> */}
-                    <h1>ShoesMarket</h1>
-                    <p id="profile-name" class="profile-name-card"></p>
 
-                    <form class="form-signin">
-                        <span id="reauth-email" class="reauth-email"></span>
-
-                        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus />
-                        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required />
-
-                        <div id="remember" class="checkbox">
-                            <label>
-                                <input type="checkbox" value="remember-me" /> Remember me
-                            </label>
-                        </div>
-
-                        <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
-                    </form>
-                    
-                    <a href="#" class="forgot-password">
-                        Forgot the password?
-                    </a>
-
+        if(this.props.userLogin.username == "") {
+            return (
+                <div className="container">
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div className="card card-container" style={{textAlign: "center"}}>
+                            {/* <img id="profile-img" className="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" /> */}
+                        <h1>ShoesMarket</h1>
+                        <p id="profile-name" className="profile-name-card"></p>
+    
+                        <form className="form-signin">
+    
+                            <input type="email" ref="inputEmail" className="form-control" placeholder="Email address" required autofocus />
+                            <input type="password" ref="inputPassword" className="form-control" placeholder="Password" required />
+    
+                            <input className="btn btn-lg btn-primary btn-block btn-signin" type="button" value="Sign in" onClick={this.onLoginClick}/>
+                        </form>
+                        
+                        <h3 className="text-danger">{this.props.userLogin.error}</h3>
+    
+                        <a href="#" className="forgot-password">
+                            Forgot the password?
+                        </a>
+    
+                    </div>
                 </div>
-            </div>
-
-        );
+            );
+        }
+        return <Redirect to="/" />
+        
     }
 }
 const mapStateToProps = (state) => {
@@ -46,4 +55,4 @@ const mapStateToProps = (state) => {
     return { userLogin };
 }
 
-export default connect(mapStateToProps)(loginPage);
+export default connect(mapStateToProps, { onLogin })(loginPage);
