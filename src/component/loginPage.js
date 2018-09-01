@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { onLogin } from '../actionCreator';
+import { onLogin, cookieCheck } from '../actionCreator';
 import { Redirect } from 'react-router-dom';
 import '../support/loginPage.css';
 
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
+
 class loginPage extends Component {
+    //ketika properti dari global state ada yg berubah. dia akan set cookies
+    //parameter newProps itu property yg setelah di ubah.
+    componentWillReceiveProps(newProps) {
+        if(newProps.userLogin.username !== "") {
+            cookies.set('userLogin', newProps.userLogin.email, {path:'/'})
+            this.props.cookieCheck();
+        }
+    }
 
     onLoginClick = () => {
         let email = this.refs.inputEmail.value;
@@ -55,4 +66,4 @@ const mapStateToProps = (state) => {
     return { userLogin };
 }
 
-export default connect(mapStateToProps, { onLogin })(loginPage);
+export default connect(mapStateToProps, { onLogin,cookieCheck })(loginPage);

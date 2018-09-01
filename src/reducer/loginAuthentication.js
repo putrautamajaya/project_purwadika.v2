@@ -11,7 +11,7 @@ export default (state = INITIAl_STATE, action) => {
         case "USER_LOGOUT" :
             return INITIAl_STATE;
         
-        case "cookie_Checked" :
+        case "COOKIE_CHECKED" :
             return {...state, cookieCheck: true};
 
         default:

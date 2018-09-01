@@ -2,12 +2,29 @@ import React, { Component } from 'react';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem, FormGroup, FormControl } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { onLogOut } from '../actionCreator';
+import { onLogOut, keepLogin, cookieCheck } from '../actionCreator';
+
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 class header extends Component {
+    componentWillMount(){
+        const cookieDiBrowser = cookies.get('userLogin');
+        
+        if(cookieDiBrowser !== undefined) {
+            this.props.keepLogin(cookieDiBrowser);
+            console.log('masuk ke keeplogin');
+        }
+        else if (cookieDiBrowser === undefined) {
+            this.props.cookieCheck();
+            console.log('masuk ke cookieCheck');
+        }
+    }
 
     onLogOutClick = () => {
         this.props.onLogOut();
+        cookies.remove('userLogin')
+        this.props.cookieCheck();
     }
 
     headerProject = () => {
@@ -70,7 +87,7 @@ class header extends Component {
                             </NavItem>
     
                             <NavItem eventKey={2} href="#">
-                                Register
+                                <Link to="/registerPage">Register</Link>
                             </NavItem>
                         </Nav>
     
@@ -144,13 +161,19 @@ class header extends Component {
                     </Navbar.Collapse>
                 </Navbar>
             );
+        }   
+    }
+
+    renderAfterCookieCheck = () => {
+        if (this.props.userLogin.cookieCheck === true) {
+            return this.headerProject();
         }
-            
+        return <div></div>;
     }
 
     render() {
         return(
-            this.headerProject()
+            this.renderAfterCookieCheck()
         );
     }
 }
@@ -161,4 +184,4 @@ const mapStateToProps = (state) => {
     return { userLogin };
 }
 
-export default connect(mapStateToProps,{ onLogOut })(header);
+export default connect(mapStateToProps,{ onLogOut, keepLogin, cookieCheck })(header);
