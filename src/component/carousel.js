@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Carousel } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import '../support/logo.css';
 
 class carouselProject extends Component {
@@ -15,23 +16,33 @@ class carouselProject extends Component {
             {/* logo-logo di samping carousel */}
             <div className="col-sm-2 logoArea">
                 <div className="backGroundLightGray">
-                    <img className="logoSize"  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvmXckW_q6TYlumVI2J2ujuXRfWtqzlFv0Lzw8UhBoDY8CtcxXeg"/>
+                    <Link to="/adidas">
+                        <img className="logoSize"  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvmXckW_q6TYlumVI2J2ujuXRfWtqzlFv0Lzw8UhBoDY8CtcxXeg"/>
+                    </Link>  
                 </div>
 
                 <div className="backGroundSilver">
-                    <img className="logoSize" src="https://img.grouponcdn.com/coupons/gMH7PGJwA4KdS3teZNvpXD/nike-highres-500x500"/>
+                    <Link to="/nike">
+                        <img className="logoSize" src="https://img.grouponcdn.com/coupons/gMH7PGJwA4KdS3teZNvpXD/nike-highres-500x500"/>
+                    </Link>  
                 </div>
 
                 <div className="backGroundLightGray">
-                    <img className="logoSize" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgyBP4L_asgymmJGaDSUgviHwDr-2cS8Q5xdJSu6V6h9TA4ErAtA"/>
+                    <Link to="/underarmor">
+                        <img className="logoSize" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgyBP4L_asgymmJGaDSUgviHwDr-2cS8Q5xdJSu6V6h9TA4ErAtA"/>
+                    </Link>
                 </div>
 
                 <div className="backGroundSilver">
-                    <img className="logoSize" src="https://botw-pd.s3.amazonaws.com/styles/logo-thumbnail/s3/102010/new_balance.gif?itok=0Y_RkIur"/>
+                    <Link to="/newbalance">
+                        <img className="logoSize" src="https://botw-pd.s3.amazonaws.com/styles/logo-thumbnail/s3/102010/new_balance.gif?itok=0Y_RkIur"/>
+                    </Link>
                 </div>
 
                 <div className="backGroundLightGray">
-                    <img className="logoSize" src="http://multimedia.lynden.wednet.edu/logos/reebok_logo.gif"/>
+                    <Link to="/reebok">
+                        <img className="logoSize" src="http://multimedia.lynden.wednet.edu/logos/reebok_logo.gif"/>
+                    </Link>
                 </div>
             </div>
             

@@ -10,6 +10,7 @@ import Nike from './component/brand/nike';
 import Reebok from './component/brand/reebok';
 import UnderArmor from './component/brand/underArmor';
 import NewBalance from './component/brand/newBalance';
+import AdminLoginPage from './component/adminLoginPage';
 
 
 
@@ -23,6 +24,7 @@ class App extends Component {
 
         <div>
           <Route exact path="/" component={ HomePage }/>
+          <Route path="/admin" component={ AdminLoginPage }/>
           <Route path="/loginPage" component={ LoginPage }/>
           <Route path="/registerPage" component={ RegisterPage }/>
           <Route path="/adidas" component={ Adidas }/>

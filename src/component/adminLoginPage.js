@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { onLogin, cookieCheck } from '../actionCreator';
+import { onLoginAdmin, cookieCheck } from '../actionCreator';
 import { Redirect } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import '../support/loginPage.css';
 
 import Cookies from 'universal-cookie';
@@ -13,7 +12,7 @@ class loginPage extends Component {
     //parameter newProps itu property yg setelah di ubah.
     componentWillReceiveProps(newProps) {
         if(newProps.userLogin.username !== "") {
-            cookies.set('userLogin', newProps.userLogin.email, {path:'/'})
+            cookies.set('adminLogin', newProps.userLogin.email, {path:'/'})
             this.props.cookieCheck();
         }
     }
@@ -22,7 +21,7 @@ class loginPage extends Component {
         let email = this.refs.inputEmail.value;
         let password = this.refs.inputPassword.value;
 
-        this.props.onLogin({email,password});
+        this.props.onLoginAdmin({email,password});
     }
 
     render() {
@@ -37,6 +36,7 @@ class loginPage extends Component {
                     <div className="card card-container" style={{textAlign: "center"}}>
                             {/* <img id="profile-img" className="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" /> */}
                         <h1>ShoesMarket</h1>
+                        <h4 className="text-info">Admin Login</h4>
                         <p id="profile-name" className="profile-name-card"></p>
     
                         <form className="form-signin">
@@ -52,11 +52,6 @@ class loginPage extends Component {
                         <a href="#" className="forgot-password">
                             Forgot the password?
                         </a>
-                        <br/>
-                        <br/>
-                        <Link to="/admin" className="text-warning">
-                            Login as admin?
-                        </Link>
     
                     </div>
                 </div>
@@ -72,4 +67,4 @@ const mapStateToProps = (state) => {
     return { userLogin };
 }
 
-export default connect(mapStateToProps, { onLogin,cookieCheck })(loginPage);
+export default connect(mapStateToProps, { onLoginAdmin,cookieCheck })(loginPage);
