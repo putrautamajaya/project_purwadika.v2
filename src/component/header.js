@@ -18,7 +18,7 @@ class header extends Component {
         }
         //kalau admin yg login
         else if(cookieAdmin !== undefined) {
-            this.props.keepLoginAdmin(cookieDiBrowser);
+            this.props.keepLoginAdmin(cookieAdmin);
             console.log('masuk ke keeplogin');
         }
 
@@ -30,7 +30,8 @@ class header extends Component {
 
     onLogOutClick = () => {
         this.props.onLogOut();
-        cookies.remove('userLogin')
+        cookies.remove('userLogin');
+        cookies.remove('adminLogin');
         this.props.cookieCheck();
     }
 
@@ -50,12 +51,24 @@ class header extends Component {
                         <Nav>
                             <NavDropdown eventKey={1} title="Shoes Category" id="basic-nav-dropdown">
                                 <MenuItem divider />
-                                <MenuItem eventKey={1.1}>Basket Ball</MenuItem>
-                                <MenuItem eventKey={1.2}>Futsal</MenuItem>
-                                <MenuItem eventKey={1.3}>Running</MenuItem>
-                                <MenuItem eventKey={1.4}>Soccer</MenuItem>
-                                <MenuItem eventKey={1.5}>Sneaker</MenuItem>
-                                <MenuItem eventKey={1.6}>All Item</MenuItem>
+                                <MenuItem eventKey={1.1}>
+                                    <Link to="/basketball">Basket Ball</Link>
+                                </MenuItem>
+                                <MenuItem eventKey={1.2}>
+                                    <Link to="/futsal">Futsal</Link>
+                                </MenuItem>
+                                <MenuItem eventKey={1.3}>
+                                    <Link to="/running">Running</Link>
+                                </MenuItem>
+                                <MenuItem eventKey={1.4}>
+                                    <Link to="/soccer">Soccer</Link>
+                                </MenuItem>
+                                <MenuItem eventKey={1.5}>
+                                    <Link to="/sneaker">Sneaker</Link>
+                                </MenuItem>
+                                <MenuItem eventKey={1.6}>
+                                    <Link to="/allitem">All Item</Link>
+                                </MenuItem>
                                 <MenuItem divider />
                             </NavDropdown>
     
@@ -124,12 +137,24 @@ class header extends Component {
                         <Nav>
                             <NavDropdown eventKey={1} title="Shoes Category" id="basic-nav-dropdown">
                                 <MenuItem divider />
-                                <MenuItem eventKey={1.1}>Basket Ball</MenuItem>
-                                <MenuItem eventKey={1.2}>Futsal</MenuItem>
-                                <MenuItem eventKey={1.3}>Running</MenuItem>
-                                <MenuItem eventKey={1.4}>Soccer</MenuItem>
-                                <MenuItem eventKey={1.5}>Sneaker</MenuItem>
-                                <MenuItem eventKey={1.6}>All Item</MenuItem>
+                                <MenuItem eventKey={1.1}>
+                                    <Link to="/basketball">Basket Ball</Link>
+                                </MenuItem>
+                                <MenuItem eventKey={1.2}>
+                                    <Link to="/futsal">Futsal</Link>
+                                </MenuItem>
+                                <MenuItem eventKey={1.3}>
+                                    <Link to="/running">Running</Link>
+                                </MenuItem>
+                                <MenuItem eventKey={1.4}>
+                                    <Link to="/soccer">Soccer</Link>
+                                </MenuItem>
+                                <MenuItem eventKey={1.5}>
+                                    <Link to="/sneaker">Sneaker</Link>
+                                </MenuItem>
+                                <MenuItem eventKey={1.6}>
+                                    <Link to="/allitem">All Item</Link>
+                                </MenuItem>
                                 <MenuItem divider />
                             </NavDropdown>
     
@@ -200,12 +225,24 @@ class header extends Component {
                         <Nav>
                             <NavDropdown eventKey={1} title="Shoes Category" id="basic-nav-dropdown">
                                 <MenuItem divider />
-                                <MenuItem eventKey={1.1}>Basket Ball</MenuItem>
-                                <MenuItem eventKey={1.2}>Futsal</MenuItem>
-                                <MenuItem eventKey={1.3}>Running</MenuItem>
-                                <MenuItem eventKey={1.4}>Soccer</MenuItem>
-                                <MenuItem eventKey={1.5}>Sneaker</MenuItem>
-                                <MenuItem eventKey={1.6}>All Item</MenuItem>
+                                <MenuItem eventKey={1.1}>
+                                    <Link to="/basketball">Basket Ball</Link>
+                                </MenuItem>
+                                <MenuItem eventKey={1.2}>
+                                    <Link to="/futsal">Futsal</Link>
+                                </MenuItem>
+                                <MenuItem eventKey={1.3}>
+                                    <Link to="/running">Running</Link>
+                                </MenuItem>
+                                <MenuItem eventKey={1.4}>
+                                    <Link to="/soccer">Soccer</Link>
+                                </MenuItem>
+                                <MenuItem eventKey={1.5}>
+                                    <Link to="/sneaker">Sneaker</Link>
+                                </MenuItem>
+                                <MenuItem eventKey={1.6}>
+                                    <Link to="/allitem">All Item</Link>
+                                </MenuItem>
                                 <MenuItem divider />
                             </NavDropdown>
     
@@ -274,12 +311,24 @@ class header extends Component {
                         <Nav>
                             <NavDropdown eventKey={1} title="Shoes Category" id="basic-nav-dropdown">
                                 <MenuItem divider />
-                                <MenuItem eventKey={1.1}>Basket Ball</MenuItem>
-                                <MenuItem eventKey={1.2}>Futsal</MenuItem>
-                                <MenuItem eventKey={1.3}>Running</MenuItem>
-                                <MenuItem eventKey={1.4}>Soccer</MenuItem>
-                                <MenuItem eventKey={1.5}>Sneaker</MenuItem>
-                                <MenuItem eventKey={1.6}>All Item</MenuItem>
+                                <MenuItem eventKey={1.1}>
+                                    <Link to="/basketball">Basket Ball</Link>
+                                </MenuItem>
+                                <MenuItem eventKey={1.2}>
+                                    <Link to="/futsal">Futsal</Link>
+                                </MenuItem>
+                                <MenuItem eventKey={1.3}>
+                                    <Link to="/running">Running</Link>
+                                </MenuItem>
+                                <MenuItem eventKey={1.4}>
+                                    <Link to="/soccer">Soccer</Link>
+                                </MenuItem>
+                                <MenuItem eventKey={1.5}>
+                                    <Link to="/sneaker">Sneaker</Link>
+                                </MenuItem>
+                                <MenuItem eventKey={1.6}>
+                                    <Link to="/allitem">All Item</Link>
+                                </MenuItem>
                                 <MenuItem divider />
                             </NavDropdown>
     
@@ -320,7 +369,7 @@ class header extends Component {
                         </Nav>
     
                         <Nav pullRight>
-                            <NavDropdown eventKey={2} title={"Hello,"+ this.props.userLogin.username} id="basic-nav-dropdown">
+                            <NavDropdown eventKey={2} title={"Hello Admin, "+ this.props.userLogin.username} id="basic-nav-dropdown">
                                 <MenuItem divider />
                                 <MenuItem eventKey={2.1}>
                                     <Link to="/adidas">Edit New Arrival Item</Link>

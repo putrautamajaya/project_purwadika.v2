@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import { API_URL_1 } from '../support/API_url';
 import { onLogin, cookieCheck } from '../actionCreator';
 
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
-class registerPage extends Component {
+class adminRegisterPage extends Component {
 
     state = {register : ""}
 
@@ -24,7 +23,8 @@ class registerPage extends Component {
         axios.post(API_URL_1 + '/users', {
             username: this.refs.inputUsername.value,
             email: this.refs.inputEmail.value,
-            password: this.refs.inputPassword.value
+            password: this.refs.inputPassword.value,
+            status: "admin"
         })
         .then((Response) => {
             alert('Register Success');
@@ -45,6 +45,7 @@ class registerPage extends Component {
                     <div className="card card-container" style={{textAlign: "center"}}>
                             
                         <h1>ShoesMarket</h1>
+                        <h4 className="text-info">Admin Register</h4>
                         <p id="profile-name" className="profile-name-card text-info">Please Register Your ID</p>
                         <br/>
     
@@ -56,13 +57,6 @@ class registerPage extends Component {
     
                             <input className="btn btn-lg btn-primary btn-block btn-signin" type="button" value="Register Now" onClick={this.onRegisterClick}/>
                         </form>
-
-                        <br/>
-                        <br/>
-
-                        <Link to="/adminregister" className="text-warning">
-                            Register as admin?
-                        </Link>
     
                     </div>
                 </div>
@@ -72,4 +66,4 @@ class registerPage extends Component {
     }
 }
 
-export default connect(null, { onLogin,cookieCheck })(registerPage);
+export default connect(null, { onLogin,cookieCheck })(adminRegisterPage);
