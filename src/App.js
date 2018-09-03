@@ -11,9 +11,7 @@ import Reebok from './component/brand/reebok';
 import UnderArmor from './component/brand/underArmor';
 import NewBalance from './component/brand/newBalance';
 import AdminLoginPage from './component/adminLoginPage';
-
-
-
+import AddMoreItemPage from './component/admin/addMoreItemPage';
 
 class App extends Component {
   render() {
@@ -32,6 +30,7 @@ class App extends Component {
           <Route path="/reebok" component={ Reebok }/>
           <Route path="/underarmor" component={ UnderArmor }/>
           <Route path="/newbalance" component={ NewBalance }/>
+          <Route path="/addmoreitem" component={ AddMoreItemPage }/>
         </div>
         
       </div>

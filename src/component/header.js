@@ -55,6 +55,7 @@ class header extends Component {
                                 <MenuItem eventKey={1.3}>Running</MenuItem>
                                 <MenuItem eventKey={1.4}>Soccer</MenuItem>
                                 <MenuItem eventKey={1.5}>Sneaker</MenuItem>
+                                <MenuItem eventKey={1.6}>All Item</MenuItem>
                                 <MenuItem divider />
                             </NavDropdown>
     
@@ -128,6 +129,7 @@ class header extends Component {
                                 <MenuItem eventKey={1.3}>Running</MenuItem>
                                 <MenuItem eventKey={1.4}>Soccer</MenuItem>
                                 <MenuItem eventKey={1.5}>Sneaker</MenuItem>
+                                <MenuItem eventKey={1.6}>All Item</MenuItem>
                                 <MenuItem divider />
                             </NavDropdown>
     
@@ -203,6 +205,7 @@ class header extends Component {
                                 <MenuItem eventKey={1.3}>Running</MenuItem>
                                 <MenuItem eventKey={1.4}>Soccer</MenuItem>
                                 <MenuItem eventKey={1.5}>Sneaker</MenuItem>
+                                <MenuItem eventKey={1.6}>All Item</MenuItem>
                                 <MenuItem divider />
                             </NavDropdown>
     
@@ -276,6 +279,7 @@ class header extends Component {
                                 <MenuItem eventKey={1.3}>Running</MenuItem>
                                 <MenuItem eventKey={1.4}>Soccer</MenuItem>
                                 <MenuItem eventKey={1.5}>Sneaker</MenuItem>
+                                <MenuItem eventKey={1.6}>All Item</MenuItem>
                                 <MenuItem divider />
                             </NavDropdown>
     
@@ -325,7 +329,7 @@ class header extends Component {
                                     <Link to="/nike">Edit Carousel Image</Link>
                                 </MenuItem>
                                 <MenuItem eventKey={2.3}>
-                                    <Link to="/reebok">Add More Item</Link>
+                                    <Link to="/addmoreitem">Add More Item</Link>
                                 </MenuItem>
                                 <MenuItem divider />
                             </NavDropdown>
