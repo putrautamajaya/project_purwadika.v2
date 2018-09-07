@@ -26,7 +26,7 @@ class underArmor extends Component {
         return this.state.underArmorData.map( (itemInUnderArmorData) => 
 
         <div className="col-sm-3">
-            <div class="card marginBottomZero" style={{width: "350px"}}>
+            <div class="card marginBottomZero" style={{width: "300px"}}>
                 <img class="card-img-top imgSize" src={itemInUnderArmorData.url}/>
                 <div class="card-body">
                     <h5 class="card-title"><b>{itemInUnderArmorData.name}</b></h5>

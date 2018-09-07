@@ -26,12 +26,13 @@ class futsal extends Component {
         return this.state.futsalData.map( (itemInFutsalData) => 
 
         <div className="col-sm-3">
-            <div class="card marginBottomZero" style={{width: "350px"}}>
+            <div class="card marginBottomZero" style={{width: "300px", height: "470px"}}>
                 <img class="card-img-top imgSize" src={itemInFutsalData.url}/>
                 <div class="card-body">
                     <h5 class="card-title"><b>{itemInFutsalData.name}</b></h5>
                     <p class="card-text"><b>Price:</b> {itemInFutsalData.price}</p>
-                    <p class="card-text"><b>brand:</b> {itemInFutsalData.brand}</p>
+                    <p class="card-text"><b>Brand:</b> {itemInFutsalData.brand}</p>
+                    <p class="card-text"><b>Type:</b> {itemInFutsalData.type}</p>
                     <a href="#" class="btn btn-primary">Add to Cart</a>
                 </div>
             </div>

@@ -26,7 +26,7 @@ class reebok extends Component {
         return this.state.reebokData.map( (itemInReebokData) => 
 
         <div className="col-sm-3">
-            <div class="card marginBottomZero" style={{width: "350px"}}>
+            <div class="card marginBottomZero" style={{width: "300px"}}>
                 <img class="card-img-top imgSize" src={itemInReebokData.url}/>
                 <div class="card-body">
                     <h5 class="card-title"><b>{itemInReebokData.name}</b></h5>

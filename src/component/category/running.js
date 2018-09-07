@@ -26,12 +26,13 @@ class running extends Component {
         return this.state.runningData.map( (itemInRunningData) => 
 
         <div className="col-sm-3">
-            <div class="card marginBottomZero" style={{width: "350px"}}>
+            <div class="card marginBottomZero" style={{width: "300px", height: "470px"}}>
                 <img class="card-img-top imgSize" src={itemInRunningData.url}/>
                 <div class="card-body">
                     <h5 class="card-title"><b>{itemInRunningData.name}</b></h5>
                     <p class="card-text"><b>Price:</b> {itemInRunningData.price}</p>
-                    <p class="card-text"><b>brand:</b> {itemInRunningData.brand}</p>
+                    <p class="card-text"><b>Brand:</b> {itemInRunningData.brand}</p>
+                    <p class="card-text"><b>Type:</b> {itemInRunningData.type}</p>
                     <a href="#" class="btn btn-primary">Add to Cart</a>
                 </div>
             </div>

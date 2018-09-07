@@ -26,7 +26,7 @@ class newBalance extends Component {
         return this.state.newBalanceData.map( (itemInNewBalanceData) => 
 
         <div className="col-sm-3">
-            <div class="card marginBottomZero" style={{width: "350px"}}>
+            <div class="card marginBottomZero" style={{width: "300px"}}>
                 <img class="card-img-top imgSize" src={itemInNewBalanceData.url}/>
                 <div class="card-body">
                     <h5 class="card-title"><b>{itemInNewBalanceData.name}</b></h5>

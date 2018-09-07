@@ -101,8 +101,10 @@ class header extends Component {
                                     <span class="glyphicon glyphicon-search"></span> Search 
                                 </p>{' '}
     
-                                <p class="btn btn-info ">
-                                    <span class="glyphicon glyphicon-shopping-cart"></span> Cart 
+                                <p class="btn btn-info ">      
+                                    <Link to="/cart" style={{color:"white"}}>
+                                        <span class="glyphicon glyphicon-shopping-cart"></span> Cart
+                                    </Link> 
                                 </p>
                                 
                             </Navbar.Form>

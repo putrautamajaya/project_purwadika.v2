@@ -26,7 +26,7 @@ class nike extends Component {
         return this.state.nikeData.map( (itemInNikeData) => 
 
         <div className="col-sm-3">
-            <div class="card marginBottomZero" style={{width: "350px"}}>
+            <div class="card marginBottomZero" style={{width: "300px"}}>
                 <img class="card-img-top imgSize" src={itemInNikeData.url}/>
                 <div class="card-body">
                     <h5 class="card-title"><b>{itemInNikeData.name}</b></h5>

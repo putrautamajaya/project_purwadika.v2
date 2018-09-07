@@ -26,7 +26,7 @@ class soccer extends Component {
         return this.state.soccerData.map( (itemInSoccerData) => 
 
         <div className="col-sm-3">
-            <div class="card marginBottomZero" style={{width: "350px"}}>
+            <div class="card marginBottomZero" style={{width: "300px"}}>
                 <img class="card-img-top imgSize" src={itemInSoccerData.url}/>
                 <div class="card-body">
                     <h5 class="card-title"><b>{itemInSoccerData.name}</b></h5>

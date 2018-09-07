@@ -22,7 +22,7 @@ class newArrival extends Component {
         return this.state.newArrivalData.map( (arrivalData) => 
 
         <div className="col-sm-3">
-            <div class="card marginBottomZero" style={{width: "350px"}}>
+            <div class="card marginBottomZero" style={{width: "300px"}}>
                 <img class="card-img-top imgSize" src={arrivalData.url}/>
                 <div class="card-body">
                     <h5 class="card-title"><b>{arrivalData.name}</b></h5>

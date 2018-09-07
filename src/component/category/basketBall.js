@@ -26,7 +26,7 @@ class basketBall extends Component {
         return this.state.basketBallData.map( (itemInBasketBallData) => 
 
         <div className="col-sm-3">
-            <div class="card marginBottomZero" style={{width: "350px"}}>
+            <div class="card marginBottomZero" style={{width: "300px"}}>
                 <img class="card-img-top imgSize" src={itemInBasketBallData.url}/>
                 <div class="card-body">
                     <h5 class="card-title"><b>{itemInBasketBallData.name}</b></h5>
