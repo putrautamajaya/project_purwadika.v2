@@ -135,3 +135,11 @@ export const keepLoginAdmin = (email) => {
 export const cookieCheck = () => {
     return {type: "COOKIE_CHECKED"};
 };
+
+export const onCart = (item) => {
+    console.log(item)
+    return {
+        type: "ADD_TO_CART",
+        payload: { item }
+    };
+};

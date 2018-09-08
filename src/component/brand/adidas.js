@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { onCart } from '../../actionCreator';
 import { API_URL_1 } from '../../support/API_url';
 
 class adidas extends Component {
 
-    state = {adidasData : []}
+    state = {
+        adidasData : [],
+        cart: []
+    }
 
     getAdidasData = () => {
         axios.get( API_URL_1 + "/items", {
@@ -18,8 +23,27 @@ class adidas extends Component {
         });
     }
 
+    getCartData = () => {
+        console.log(this.props.addCart );
+        if(this.props.addCart.item  == undefined) {
+            this.setState({ cart: this.props.addCart});
+        }
+        else {
+            this.setState({ cart: this.props.addCart.item });
+        }
+    }
+
     componentWillMount() {
         this.getAdidasData();
+        this.getCartData();
+        console.log('will mount')
+        
+    }
+
+    onCartClick = (itemData) => {
+        console.log(itemData)
+        this.state.cart.push(itemData)
+        this.props.onCart(this.state.cart);
     }
 
     renderBrandAdidas = () => {
@@ -33,7 +57,7 @@ class adidas extends Component {
                     <p class="card-text"><b>Price:</b> {itemInAdidasData.price}</p>
                     <p class="card-text"><b>Brand:</b> {itemInAdidasData.brand}</p>
                     <p class="card-text"><b>Type:</b> {itemInAdidasData.type}</p>
-                    <a href="#" class="btn btn-primary">Add to Cart</a>
+                    <input type="button" class="btn btn-primary" value="Add to Cart" onClick={() => this.onCartClick(itemInAdidasData)}/>
                 </div>
             </div>
         </div>
@@ -42,7 +66,8 @@ class adidas extends Component {
     }
 
     render() {
-        console.log(this.state.adidasData)
+        console.log(this.props.addCart)
+        console.log(this.state.cart);
         return(
             <div className="container-fluid">
                 <br/>               
@@ -54,4 +79,10 @@ class adidas extends Component {
     }
 }
 
-export default adidas;
+const mapStateToProps = (state) => {
+    let addCart = state.addCart
+
+    return { addCart };
+}
+
+export default connect(mapStateToProps, { onCart })(adidas);

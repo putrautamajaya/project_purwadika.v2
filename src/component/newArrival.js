@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { onCart } from '../actionCreator';
 import '../support/newArrival.css';
 import { API_URL_1 } from '../support/API_url';
 
+
 class newArrival extends Component {
-    state = { newArrivalData: []}
+    state = { 
+        newArrivalData: [],
+        cart: []
+    }
 
     getNewArrivalData = () => {
         axios.get( API_URL_1 + "/newArrival" )
@@ -14,8 +20,24 @@ class newArrival extends Component {
         });
     }
 
+    getCartData = () => {
+        console.log(this.props.addCart );
+        if(this.props.addCart.item  == undefined) {
+            this.setState({ cart: this.props.addCart});
+        }
+        else {
+            this.setState({ cart: this.props.addCart.item });
+        }
+    }
+
     componentWillMount() {
         this.getNewArrivalData();
+        this.getCartData();
+    }
+
+    onCartClick = (itemData) => {
+        this.state.cart.push(itemData)
+        this.props.onCart(this.state.cart);
     }
 
     renderNewArrival = () => {
@@ -28,7 +50,7 @@ class newArrival extends Component {
                     <h5 class="card-title"><b>{arrivalData.name}</b></h5>
                     <p class="card-text"><b>Price:</b> {arrivalData.price}</p>
                     <p class="card-text"><b>brand:</b> {arrivalData.brand}</p>
-                    <a href="#" class="btn btn-primary">Add to Cart</a>
+                    <input type="button" class="btn btn-primary" value="Add to Cart" onClick={() => this.onCartClick(arrivalData)}/>
                 </div>
             </div>
         </div>
@@ -37,7 +59,7 @@ class newArrival extends Component {
     }
 
     render() {
-        console.log(this.state.newArrivalData)
+        console.log(this.props.addCart)
         return (
             <div className="container-fluid">
 
@@ -53,5 +75,10 @@ class newArrival extends Component {
         );
     }
 }
+const mapStateToProps = (state) => {
+    let addCart = state.addCart
 
-export default newArrival;
+    return { addCart };
+}
+
+export default connect(mapStateToProps, { onCart })(newArrival);
