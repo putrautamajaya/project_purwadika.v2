@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
+import { API_URL_1 } from '../support/API_url';
+import CartPageItem from './cartPageItem';
 
 class cartPage extends Component {
     state = { 
         cart: [],
         totalHarga: 0,
-        itemQuantity: []
+        itemQuantity: [],
+        selectEditID: ''
     }
 
+    // 1. create fungsi untuk  mengisi state cart, 
+    //    lalu di isi dengan global state addCart(isiny item" yg di dlm cart)
+    //      - if = itu untuk kalau addCartny masi kosong.
+    //      - else = kalau addCartny sudah ada isi. isiny itu dalam betuk "item"
     getCartData = () => {
         console.log(this.props.addCart );
         if(this.props.addCart.item  == undefined) {
@@ -18,6 +26,7 @@ class cartPage extends Component {
         }
     }
 
+    // 2. mengisi state cart
     componentWillMount() {
         this.getCartData();
     }
@@ -35,11 +44,30 @@ class cartPage extends Component {
     quantity = () => {
         this.state.cart.map( 
             (item) => this.state.itemQuantity.push({
-                id: item.id,
+                id : item.id,
+                name : item.name,
+                type : item.type,
+                brand : item.brand,
+                url : item.url,
+                price : item.price,
                 quantity: 1
             })
         )
-        console.log(this.state.itemQuantity)
+        this.updateTransactionDataBase();
+    }
+
+    //abis pertama kali buka kan update quantity ke variable itemQuantity.
+    //nah isiny itemQuantity di update ke database.
+    updateTransactionDataBase = () => {  
+        this.state.itemQuantity.map((item) =>
+        axios.post( API_URL_1 + '/transaction', item )
+        .then((response) => {
+            alert("Update Transaction Success!");
+        })
+        .catch((error) => {
+            alert("Update Transaction Error!");
+        })
+        )  
     }
     
     //after 1st render do these
@@ -48,90 +76,59 @@ class cartPage extends Component {
         this.quantity();
     }
 
-    //if + quantity click do this. adding quantity
-    onQuantityUpClick = (id) =>{
-        let quantityArr = this.state.itemQuantity;
-        for (let index in quantityArr){
-            if(quantityArr[index].id == id){
-                quantityArr[index].quantity += 1;
-                console.log('quantity di tambahkan 1')
-            }
-        }
-        this.setState({itemQuantity: quantityArr})
-        console.log(this.state.itemQuantity[0].quantity)
-    }
-
+    // 3. Create fungsi render
     renderTableCart = () =>{
 
-        if(this.state.itemQuantity[0] !== undefined){
-            return this.state.cart.map( (item) => 
-
-            <tr>
-        
-                <td data-th="Product">
-                    <div className="row">
-                        <div className="col-sm-2 hidden-xs"><img src={item.url} alt="..." className="img-responsive"/></div>
-                        <div className="col-sm-10">
-                            <h4 className="nomargin">{item.name}</h4>
-                            <p><b>Brand:</b> {item.brand}</p>
-                            <p><b>Type:</b> {item.type}</p>
-                        </div>
-                    </div>
-                </td>
-
-                <td data-th="Price">Rp. {item.price}</td>
-
-                <td data-th="Quantity">
-                    <input type="number" className="form-control text-center" value={this.state.itemQuantity[0].quantity} />
-                </td>
-
-                <td data-th="Subtotal" className="text-center">Rp. {item.price}</td>
-
-                <td className="actions" data-th="">
-                    <button className="btn btn-info btn-sm"><i className="glyphicon glyphicon-plus" onClick={() => this.onQuantityUpClick(item.id)}></i></button>
-                    <button className="btn btn-danger btn-sm"><i className="glyphicon glyphicon-trash"></i></button>								
-                </td>
-
-            </tr>
-            ); 
-        }
-
-        return this.state.cart.map( (item) => 
-
-        <tr>
-    
-            <td data-th="Product">
-                <div className="row">
-                    <div className="col-sm-2 hidden-xs"><img src={item.url} alt="..." className="img-responsive"/></div>
-                    <div className="col-sm-10">
-                        <h4 className="nomargin">{item.name}</h4>
-                        <p><b>Brand:</b> {item.brand}</p>
-                        <p><b>Type:</b> {item.type}</p>
-                    </div>
-                </div>
-            </td>
-
-            <td data-th="Price">Rp. {item.price}</td>
-
-            <td data-th="Quantity">
-                <input type="number" className="form-control text-center" defaultValue="1" />
-            </td>
-
-            <td data-th="Subtotal" className="text-center">Rp. {item.price}</td>
-
-            <td className="actions" data-th="">
-                <button className="btn btn-info btn-sm"><i className="glyphicon glyphicon-plus" onClick={() => this.onQuantityUpClick(item.id)}></i></button>
-                <button className="btn btn-danger btn-sm"><i className="glyphicon glyphicon-trash"></i></button>								
-            </td>
-
-        </tr>
+        return this.state.itemQuantity.map( (item) => 
+        <CartPageItem 
+            key={item.id} 
+            id={item.id} 
+            name={item.name} 
+            type={item.type} 
+            brand={item.brand} 
+            url={item.url}
+            price={item.price} 
+            fnEdit={() => this.onEditClick(item.id)}
+            selectedID = {this.state.selectEditID}
+            fnUpdate = {(refs) => this.onUpdateClick(item.id, refs)}
+            fnDelete={() => this.onDeleteClick(item.id)}
+        />
         ); 
         
     }
 
+    onEditClick(id) {
+        this.setState({selectEditID : id});
+    }
+
+    onUpdateClick = (id, refs) => {
+        console.log(refs.updateUrl);
+        axios.put(API_URL_1 + "/transaction/" + id, {
+            name: refs.updateName.value,
+            type: refs.updateType.value,
+            brand: refs.updateBrand.value,
+            url: refs.updateUrl.value,
+            price: refs.updatePrice.value,
+            quantity: refs.updateQuantity.value
+        })
+        .then((Response) => {
+            alert("Update Success!");
+            
+            axios.get( API_URL_1 + "/transaction" )
+            .then( itemData => {
+                this.setState({ itemQuantity: itemData.data });
+                this.setState({ selectEditID: "" });
+            });
+        })
+        .catch((error) => {
+            console.log(error)
+            alert("Update Error!");
+        })
+    }
+
     render() {
-        console.log(this.state.cart );
-        console.log(this.state.totalHarga );
+        // console.log(refs.updatePrice.value);
+        
         return(
             <div className="container">
             <br/><br/><br/>
@@ -170,3 +167,4 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps)(cartPage);
+
