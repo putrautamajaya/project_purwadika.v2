@@ -19,7 +19,7 @@ import Futsal from './component/category/futsal';
 import Running from './component/category/running';
 import Soccer from './component/category/soccer';
 import Sneaker from './component/category/sneaker';
-import CartPage from './component/cartPage';
+import CartPage from './component/cartPage.js';
 
 class App extends Component {
   render() {

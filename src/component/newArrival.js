@@ -20,24 +20,40 @@ class newArrival extends Component {
         });
     }
 
-    getCartData = () => {
-        console.log(this.props.addCart );
-        if(this.props.addCart.item  == undefined) {
-            this.setState({ cart: this.props.addCart});
-        }
-        else {
-            this.setState({ cart: this.props.addCart.item });
-        }
-    }
+    // getCartData = () => {
+    //     console.log(this.props.addCart );
+    //     if(this.props.addCart.item  == undefined) {
+    //         this.setState({ cart: this.props.addCart});
+    //     }
+    //     else {
+    //         this.setState({ cart: this.props.addCart.item });
+    //     }
+    // }
 
     componentWillMount() {
         this.getNewArrivalData();
-        this.getCartData();
+        // this.getCartData();
     }
 
+    // onCartClick = (itemData) => {
+    //     this.state.cart.push(itemData)
+    //     this.props.onCart(this.state.cart);
+    // }
+
+    //pass add cart di click. masukin data item yg di click ke database transaction.
+    //lalu di edit di kasi value quantity = 1
     onCartClick = (itemData) => {
-        this.state.cart.push(itemData)
-        this.props.onCart(this.state.cart);
+        axios.post( API_URL_1 + '/transaction', {
+            ...itemData, 
+            quantity: 1,
+            subtotal: itemData.price
+        })
+        .then((response) => {
+            alert("Add Transaction Success!");
+        })
+        .catch((error) => {
+            alert("Add Transaction Error!");
+        })      
     }
 
     renderNewArrival = () => {

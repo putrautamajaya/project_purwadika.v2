@@ -3,27 +3,39 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { API_URL_1 } from '../support/API_url';
 import CartPageItem from './cartPageItem';
+import { Link } from 'react-router-dom';
 
 class cartPage extends Component {
     state = { 
         cart: [],
         totalHarga: 0,
-        itemQuantity: [],
         selectEditID: ''
     }
 
-    // 1. create fungsi untuk  mengisi state cart, 
-    //    lalu di isi dengan global state addCart(isiny item" yg di dlm cart)
-    //      - if = itu untuk kalau addCartny masi kosong.
-    //      - else = kalau addCartny sudah ada isi. isiny itu dalam betuk "item"
+    // 1. create fungsi untuk  mengisi state cart, data di ambil dari database
+    // 2. setelah state cart terisi. menghitung total harga
     getCartData = () => {
-        console.log(this.props.addCart );
-        if(this.props.addCart.item  == undefined) {
-            this.setState({ cart: this.props.addCart});
-        }
-        else {
-            this.setState({ cart: this.props.addCart.item });
-        }
+        axios.get( API_URL_1 + "/transaction" )
+        .then( itemData => {
+            console.log(itemData)
+            this.setState({ cart: itemData.data });
+            
+            this.totalHarga();
+        })
+        .catch((error) => {
+            console.log(error)
+            alert("Update Cart Error!");
+        }) 
+    }
+
+    // ambil semua value price di cart lalu di jumlahkan.
+    totalHarga = () => {
+        console.log('total harga dijalankan')
+        let total = 0;
+        this.state.cart.map( 
+            (item) => total = total + parseInt(item.subtotal)
+        );
+        this.setState({totalHarga: total});
     }
 
     // 2. mengisi state cart
@@ -31,94 +43,30 @@ class cartPage extends Component {
         this.getCartData();
     }
 
-    totalHarga = () => {
-        console.log(this.state.cart)
-        let total = 0;
-        this.state.cart.map( 
-            (item) => total = total + item.price
-        );
-        this.setState({totalHarga: total});
-    }
-
-    //creating first quantity after opening the cartpage.
-    quantity = () => {
-        this.state.cart.map( 
-            (item) => this.state.itemQuantity.push({
-                id : item.id,
-                name : item.name,
-                type : item.type,
-                brand : item.brand,
-                url : item.url,
-                price : item.price,
-                quantity: 1
-            })
-        )
-        this.updateTransactionDataBase();
-    }
-
-    //abis pertama kali buka kan update quantity ke variable itemQuantity.
-    //nah isiny itemQuantity di update ke database.
-    updateTransactionDataBase = () => {  
-        this.state.itemQuantity.map((item) =>
-        axios.post( API_URL_1 + '/transaction', item )
-        .then((response) => {
-            alert("Update Transaction Success!");
-        })
-        .catch((error) => {
-            alert("Update Transaction Error!");
-        })
-        )  
-    }
-    
-    //after 1st render do these
-    componentDidMount() {
-        this.totalHarga();
-        this.quantity();
-    }
-
-    // 3. Create fungsi render
-    renderTableCart = () =>{
-
-        return this.state.itemQuantity.map( (item) => 
-        <CartPageItem 
-            key={item.id} 
-            id={item.id} 
-            name={item.name} 
-            type={item.type} 
-            brand={item.brand} 
-            url={item.url}
-            price={item.price} 
-            fnEdit={() => this.onEditClick(item.id)}
-            selectedID = {this.state.selectEditID}
-            fnUpdate = {(refs) => this.onUpdateClick(item.id, refs)}
-            fnDelete={() => this.onDeleteClick(item.id)}
-        />
-        ); 
-        
-    }
-
     onEditClick(id) {
         this.setState({selectEditID : id});
     }
 
+    calculateSubTotal = (quantity,price) => {
+        let hargaSubTotal = parseInt(quantity) * parseInt(price);
+        return hargaSubTotal;
+    }
+
     onUpdateClick = (id, refs) => {
-        console.log(refs.updateUrl);
+        
         axios.put(API_URL_1 + "/transaction/" + id, {
             name: refs.updateName.value,
             type: refs.updateType.value,
             brand: refs.updateBrand.value,
             url: refs.updateUrl.value,
             price: refs.updatePrice.value,
-            quantity: refs.updateQuantity.value
+            quantity: refs.updateQuantity.value,
+            subtotal: this.calculateSubTotal(refs.updateQuantity.value, refs.updatePrice.value)
         })
         .then((Response) => {
-            alert("Update Success!");
-            
-            axios.get( API_URL_1 + "/transaction" )
-            .then( itemData => {
-                this.setState({ itemQuantity: itemData.data });
-                this.setState({ selectEditID: "" });
-            });
+            this.setState({ selectEditID: "" });
+            this.getCartData();
+            alert("Update Success!"); 
         })
         .catch((error) => {
             console.log(error)
@@ -126,8 +74,31 @@ class cartPage extends Component {
         })
     }
 
+    // 3. Create fungsi render
+    renderTableCart = () =>{
+        console.log(this.state.subTotal)
+        return this.state.cart.map( (item) => 
+        <CartPageItem 
+            key = {item.id} 
+            id = {item.id} 
+            name = {item.name} 
+            type = {item.type} 
+            brand = {item.brand} 
+            url = {item.url}
+            price = {item.price} 
+            quantity = {item.quantity}
+            subtotal = {item.subtotal}
+            fnEdit = {() => this.onEditClick(item.id)}
+            selectedID = {this.state.selectEditID}
+            fnUpdate = {(refs) => this.onUpdateClick(item.id, refs)}
+            fnDelete = {() => this.onDeleteClick(item.id)}
+        />
+        ); 
+        
+    }
+
     render() {
-        // console.log(refs.updatePrice.value);
+        console.log(this.state.cart);
         
         return(
             <div className="container">
@@ -149,7 +120,7 @@ class cartPage extends Component {
 
                     <tfoot>
                         <tr>
-                            <td><a href="#" className="btn btn-warning"><i className="glyphicon glyphicon-chevron-left"></i> Continue Shopping</a></td>
+                            <td><Link to="/" className="btn btn-warning"><i className="glyphicon glyphicon-chevron-left"></i> Continue Shopping</Link></td>
                             <td colspan="2" className="hidden-xs"></td>
                             <td className="hidden-xs text-center"><strong>Rp. {this.state.totalHarga}</strong></td>
                             <td><a href="#" className="btn btn-success btn-block">Checkout <i className="glyphicon glyphicon-chevron-right"></i></a></td>
