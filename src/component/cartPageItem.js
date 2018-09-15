@@ -30,7 +30,9 @@ class cartPageItem extends Component {
 
                     <td className="actions" data-th="">
                         <input type="button" className="btn btn-warning btn-sm" value="Edit" onClick={this.props.fnEdit} />
-                        <button className="btn btn-danger btn-sm"><i className="glyphicon glyphicon-trash"></i></button>								
+                        <button className="btn btn-danger btn-sm">
+                            <i className="glyphicon glyphicon-trash" onClick={() => this.props.fnDelete()}></i>
+                        </button>								
                     </td>
 
                 </tr>
@@ -58,7 +60,9 @@ class cartPageItem extends Component {
                         </div>
                     </td>
 
-                    <td data-th="Price">Rp. <input type="text" ref="updatePrice" defaultValue={this.props.price} disabled/> </td>
+                    <td data-th="Price">
+                        Rp. <input type="text" ref="updatePrice" defaultValue={this.props.price} disabled/> 
+                    </td>
 
                     <td data-th="Quantity">
                         <input type="number" ref="updateQuantity" className="form-control text-center" defaultValue={this.props.quantity} />
@@ -67,8 +71,11 @@ class cartPageItem extends Component {
                     <td data-th="Subtotal" className="text-center">Rp. {this.props.subtotal}</td>
 
                     <td className="actions" data-th="">
-                    <input type="button" className="btn btn-info btn-sm" value="Update" onClick={() => this.props.fnUpdate(this.refs)} />
-                        <button className="btn btn-danger btn-sm" ><i className="glyphicon glyphicon-trash"></i></button>								
+                        <input type="button" className="btn btn-info btn-sm" value="Update" onClick={() => this.props.fnUpdate(this.refs)} />
+                        
+                        <button className="btn btn-danger btn-sm" >
+                            <i className="glyphicon glyphicon-trash" onClick={() => this.props.fnDelete()}></i>
+                        </button>								
                     </td>
 
                 </tr>

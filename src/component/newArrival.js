@@ -43,17 +43,24 @@ class newArrival extends Component {
     //pass add cart di click. masukin data item yg di click ke database transaction.
     //lalu di edit di kasi value quantity = 1
     onCartClick = (itemData) => {
-        axios.post( API_URL_1 + '/transaction', {
-            ...itemData, 
-            quantity: 1,
-            subtotal: itemData.price
-        })
-        .then((response) => {
-            alert("Add Transaction Success!");
-        })
-        .catch((error) => {
-            alert("Add Transaction Error!");
-        })      
+        if(this.props.userLogin.username !== ''){
+            axios.post( API_URL_1 + '/transaction', {
+                ...itemData, 
+                quantity: 1,
+                subtotal: itemData.price
+            })
+            .then((response) => {
+                alert("Add Transaction Success!");
+            })
+            .catch((error) => {
+                alert("Add Transaction Error!");
+            }) 
+        }
+
+        else {
+            alert('Please Login First')
+        }
+             
     }
 
     renderNewArrival = () => {
@@ -93,8 +100,9 @@ class newArrival extends Component {
 }
 const mapStateToProps = (state) => {
     let addCart = state.addCart
+    let userLogin = state.userLogin
 
-    return { addCart };
+    return { addCart, userLogin };
 }
 
 export default connect(mapStateToProps, { onCart })(newArrival);
