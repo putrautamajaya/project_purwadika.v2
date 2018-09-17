@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { onCart } from '../../actionCreator';
 import { API_URL_1 } from '../../support/API_url';
 
 class adidas extends Component {
 
     state = {
         adidasData : [],
-        cart: []
     }
 
     getAdidasData = () => {
@@ -23,27 +21,28 @@ class adidas extends Component {
         });
     }
 
-    getCartData = () => {
-        console.log(this.props.addCart );
-        if(this.props.addCart.item  == undefined) {
-            this.setState({ cart: this.props.addCart});
-        }
-        else {
-            this.setState({ cart: this.props.addCart.item });
-        }
-    }
-
     componentWillMount() {
-        this.getAdidasData();
-        this.getCartData();
-        console.log('will mount')
-        
+        this.getAdidasData();        
     }
 
     onCartClick = (itemData) => {
-        console.log(itemData)
-        this.state.cart.push(itemData)
-        this.props.onCart(this.state.cart);
+        if(this.props.userLogin.username !== ''){
+            axios.post( API_URL_1 + '/transaction', {
+                ...itemData, 
+                quantity: 1,
+                subtotal: itemData.price
+            })
+            .then((response) => {
+                alert("Add To Cart Success!");
+            })
+            .catch((error) => {
+                alert("Add To Cart Error!");
+            }) 
+        }
+
+        else {
+            alert('Please Login First')
+        } 
     }
 
     renderBrandAdidas = () => {
@@ -81,8 +80,9 @@ class adidas extends Component {
 
 const mapStateToProps = (state) => {
     let addCart = state.addCart
+    let userLogin = state.userLogin
 
-    return { addCart };
+    return { addCart, userLogin };
 }
 
-export default connect(mapStateToProps, { onCart })(adidas);
+export default connect(mapStateToProps)(adidas);

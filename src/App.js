@@ -20,6 +20,7 @@ import Running from './component/category/running';
 import Soccer from './component/category/soccer';
 import Sneaker from './component/category/sneaker';
 import CartPage from './component/cartPage.js';
+import SearchPage from './component/searchPage';
 
 class App extends Component {
   render() {
@@ -47,6 +48,7 @@ class App extends Component {
           <Route path="/soccer" component={ Soccer }/>
           <Route path="/sneaker" component={ Sneaker }/>
           <Route path="/cart" component={ CartPage }/>
+          <Route path="/search" component={ SearchPage }/>
         </div>
         
       </div>

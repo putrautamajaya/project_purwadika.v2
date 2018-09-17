@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 import { API_URL_1 } from '../../support/API_url';
 
 class underArmor extends Component {
@@ -22,17 +23,37 @@ class underArmor extends Component {
         this.getUnderArmorData();
     }
 
+    onCartClick = (itemData) => {
+        if(this.props.userLogin.username !== ''){
+            axios.post( API_URL_1 + '/transaction', {
+                ...itemData, 
+                quantity: 1,
+                subtotal: itemData.price
+            })
+            .then((response) => {
+                alert("Add To Cart Success!");
+            })
+            .catch((error) => {
+                alert("Add To Cart Error!");
+            }) 
+        }
+
+        else {
+            alert('Please Login First')
+        } 
+    }
+
     renderBrandUnderArmor = () => {
         return this.state.underArmorData.map( (itemInUnderArmorData) => 
 
         <div className="col-sm-3">
-            <div class="card marginBottomZero" style={{width: "300px"}}>
+            <div class="card marginBottomZero" style={{width: "300px", height: "470px"}}>
                 <img class="card-img-top imgSize" src={itemInUnderArmorData.url}/>
                 <div class="card-body">
                     <h5 class="card-title"><b>{itemInUnderArmorData.name}</b></h5>
                     <p class="card-text"><b>Price:</b> {itemInUnderArmorData.price}</p>
                     <p class="card-text"><b>brand:</b> {itemInUnderArmorData.brand}</p>
-                    <a href="#" class="btn btn-primary">Add to Cart</a>
+                    <input type="button" class="btn btn-primary" value="Add to Cart" onClick={() => this.onCartClick(itemInUnderArmorData)}/>
                 </div>
             </div>
         </div>
@@ -53,4 +74,11 @@ class underArmor extends Component {
     }
 }
 
-export default underArmor;
+const mapStateToProps = (state) => {
+    let addCart = state.addCart
+    let userLogin = state.userLogin
+
+    return { addCart, userLogin };
+}
+
+export default connect(mapStateToProps)(underArmor);

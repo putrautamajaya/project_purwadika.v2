@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 import { API_URL_1 } from '../../support/API_url';
 
 class running extends Component {
@@ -22,6 +23,26 @@ class running extends Component {
         this.getRunningData();
     }
 
+    onCartClick = (itemData) => {
+        if(this.props.userLogin.username !== ''){
+            axios.post( API_URL_1 + '/transaction', {
+                ...itemData, 
+                quantity: 1,
+                subtotal: itemData.price
+            })
+            .then((response) => {
+                alert("Add To Cart Success!");
+            })
+            .catch((error) => {
+                alert("Add To Cart Error!");
+            }) 
+        }
+
+        else {
+            alert('Please Login First')
+        } 
+    }
+
     renderRunning = () => {
         return this.state.runningData.map( (itemInRunningData) => 
 
@@ -33,7 +54,7 @@ class running extends Component {
                     <p class="card-text"><b>Price:</b> {itemInRunningData.price}</p>
                     <p class="card-text"><b>Brand:</b> {itemInRunningData.brand}</p>
                     <p class="card-text"><b>Type:</b> {itemInRunningData.type}</p>
-                    <a href="#" class="btn btn-primary">Add to Cart</a>
+                    <input type="button" class="btn btn-primary" value="Add to Cart" onClick={() => this.onCartClick(itemInRunningData)}/>
                 </div>
             </div>
         </div>
@@ -54,4 +75,11 @@ class running extends Component {
     }
 }
 
-export default running;
+const mapStateToProps = (state) => {
+    let addCart = state.addCart
+    let userLogin = state.userLogin
+
+    return { addCart, userLogin };
+}
+
+export default connect(mapStateToProps)(running);

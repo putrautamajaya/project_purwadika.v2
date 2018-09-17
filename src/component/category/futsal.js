@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 import { API_URL_1 } from '../../support/API_url';
 
 class futsal extends Component {
@@ -21,6 +22,26 @@ class futsal extends Component {
     componentWillMount() {
         this.getFutsalData();
     }
+    
+    onCartClick = (itemData) => {
+        if(this.props.userLogin.username !== ''){
+            axios.post( API_URL_1 + '/transaction', {
+                ...itemData, 
+                quantity: 1,
+                subtotal: itemData.price
+            })
+            .then((response) => {
+                alert("Add To Cart Success!");
+            })
+            .catch((error) => {
+                alert("Add To Cart Error!");
+            }) 
+        }
+
+        else {
+            alert('Please Login First')
+        } 
+    }
 
     renderFutsal = () => {
         return this.state.futsalData.map( (itemInFutsalData) => 
@@ -33,7 +54,7 @@ class futsal extends Component {
                     <p class="card-text"><b>Price:</b> {itemInFutsalData.price}</p>
                     <p class="card-text"><b>Brand:</b> {itemInFutsalData.brand}</p>
                     <p class="card-text"><b>Type:</b> {itemInFutsalData.type}</p>
-                    <a href="#" class="btn btn-primary">Add to Cart</a>
+                    <input type="button" class="btn btn-primary" value="Add to Cart" onClick={() => this.onCartClick(itemInFutsalData)}/>
                 </div>
             </div>
         </div>
@@ -54,4 +75,11 @@ class futsal extends Component {
     }
 }
 
-export default futsal;
+const mapStateToProps = (state) => {
+    let addCart = state.addCart
+    let userLogin = state.userLogin
+
+    return { addCart, userLogin };
+}
+
+export default connect(mapStateToProps)(futsal);

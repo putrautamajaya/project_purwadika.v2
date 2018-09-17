@@ -20,25 +20,9 @@ class newArrival extends Component {
         });
     }
 
-    // getCartData = () => {
-    //     console.log(this.props.addCart );
-    //     if(this.props.addCart.item  == undefined) {
-    //         this.setState({ cart: this.props.addCart});
-    //     }
-    //     else {
-    //         this.setState({ cart: this.props.addCart.item });
-    //     }
-    // }
-
     componentWillMount() {
         this.getNewArrivalData();
-        // this.getCartData();
     }
-
-    // onCartClick = (itemData) => {
-    //     this.state.cart.push(itemData)
-    //     this.props.onCart(this.state.cart);
-    // }
 
     //pass add cart di click. masukin data item yg di click ke database transaction.
     //lalu di edit di kasi value quantity = 1
@@ -50,10 +34,10 @@ class newArrival extends Component {
                 subtotal: itemData.price
             })
             .then((response) => {
-                alert("Add Transaction Success!");
+                alert("Add To Cart Success!");
             })
             .catch((error) => {
-                alert("Add Transaction Error!");
+                alert("Add To Cart Error!");
             }) 
         }
 

@@ -4,7 +4,6 @@ import axios from 'axios';
 import { API_URL_1 } from '../support/API_url';
 import CartPageItem from './cartPageItem';
 import { Link } from 'react-router-dom';
-import { Redirect } from 'react-router-dom';
 
 class cartPage extends Component {
     state = { 
@@ -57,6 +56,7 @@ class cartPage extends Component {
         return hargaSubTotal;
     }
 
+    //kalau di click update dia ngedit item yg idny di tuju
     onUpdateClick = (id, refs) => {
         
         axios.put(API_URL_1 + "/transaction/" + id, {

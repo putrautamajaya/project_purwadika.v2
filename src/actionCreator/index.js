@@ -143,3 +143,11 @@ export const onCart = (item) => {
         payload: { item }
     };
 };
+
+export const onSearch = (itemSearch) => {
+    console.log(itemSearch)
+    return {
+        type: "SEARCH",
+        payload: itemSearch
+    };
+};
